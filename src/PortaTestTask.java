@@ -98,7 +98,12 @@ public class PortaTestTask {
         return new long[]{maxInc, maxDec};
     }
 
-    // The method calculate arithmetic mean.
+    /**
+     * The method calculates the arithmetic mean of a set of numbers
+     *
+     * @param numbersList must be {@link java.util.List} of {@link java.lang.Long}
+     * @return the <b>long</b> arithmetic mean of numbersList
+     */
     public static long calculateArithmeticMean(List<Long> numbersList) {
         long sum = 0;
         for (Long l : numbersList) {
@@ -108,14 +113,14 @@ public class PortaTestTask {
         if (sum != 0) {
             return sum / numbersList.size();
         }
-        return 0L;
+        return 0;
     }
 
     /**
      * The method find median in list of numbers
      *
      * @param numbersList must be {@link java.util.List} of {@link java.lang.Long}
-     * @return median double in numbersList
+     * @return median <b>double</b> in numbersList
      */
     public static double findMedian(List<Long> numbersList) {
         if (numbersList.size() == 1) { // The case when there is one element in the array
