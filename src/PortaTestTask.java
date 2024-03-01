@@ -158,9 +158,16 @@ public class PortaTestTask {
     /* The method copies the original list of numbers and then sorts and assigns it to a variable sortedNumbersList.
      When the method is called again, it returns the result from the variable sortedNumbersList.
      This avoids wasting resources on re-sorting. */
+
+    /**
+     * The method sorts a list of numbers in ascending order
+     *
+     * @param numbersList must be {@link java.util.List} of {@link java.lang.Long}
+     * @return sorted {@link java.util.List} of {@link java.lang.Long}
+     */
     private static List<Long> sortNumbersAsc(List<Long> numbersList) {
-        ArrayList<Long> copyNumbersList = new ArrayList<>(numbersList);
         if (sortedNumbersList == null) {
+            ArrayList<Long> copyNumbersList = new ArrayList<>(numbersList);
             Collections.sort(copyNumbersList);
             sortedNumbersList = copyNumbersList;
         }
