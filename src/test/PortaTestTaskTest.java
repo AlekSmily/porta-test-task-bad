@@ -86,4 +86,11 @@ class PortaTestTaskTest {
         double expected4 = 0.0;
         assertEquals(expected4, PortaTestTask.findMedian(testArrList4));
     }
+
+    @Test
+    void getMaxIncreasingSequence() {
+        List<Long> arrList5 = Arrays.asList(-5L, -4L, -8L, 4L, 5L);
+        long expected5 = 3L;
+        assertEquals(expected5, PortaTestTask.getMaxIncreasingSequence(arrList5));
+    }
 }

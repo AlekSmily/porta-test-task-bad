@@ -57,8 +57,42 @@ public class PortaTestTask {
         System.out.println("Median: " + findMedian(allNumbers));
         System.out.println("Arithmetic mean: " + calculateArithmeticMean(allNumbers));
 
+        System.out.println("New method: " + getMaxIncreasingSequence(allNumbers));
+        System.out.println("New method 2: " + getMaxDescendingSequence(allNumbers));
+        getMaxSeq(allNumbers);
+
         // Print execution time
         System.out.println("Execution time: " + (System.currentTimeMillis() - startTimePoint) / 1000 + " seconds");
+    }
+
+    public static long getMaxIncreasingSequence(List<Long> numbersList) {
+        long maxSequence = 1;
+        long maxCurrentSequence = 1;
+        for (int i = 0, j = 1; j < numbersList.size(); i++, j++) {
+            if (numbersList.get(i) < numbersList.get(j)) {
+                maxCurrentSequence++;
+            } else if (maxCurrentSequence > maxSequence) {
+                maxSequence = maxCurrentSequence;
+                maxCurrentSequence = 1;
+            } else maxCurrentSequence = 1;
+        }
+        if (maxCurrentSequence > maxSequence) maxSequence = maxCurrentSequence;
+        return maxSequence;
+    }
+
+    public static long getMaxDescendingSequence(List<Long> numbersList) {
+        long maxSequence = 1;
+        long maxCurrentSequence = 1;
+        for (int i = 0, j = 1; j < numbersList.size(); i++, j++) {
+            if (numbersList.get(i) > numbersList.get(j)) {
+                maxCurrentSequence++;
+            } else if (maxCurrentSequence > maxSequence) {
+                maxSequence = maxCurrentSequence;
+                maxCurrentSequence = 1;
+            } else maxCurrentSequence = 1;
+        }
+        if (maxCurrentSequence > maxSequence) maxSequence = maxCurrentSequence;
+        return maxSequence;
     }
 
     public static long[] getMaxSeq(List<Long> arrList) {
