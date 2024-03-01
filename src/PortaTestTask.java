@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class PortaTestTask {
-    private static List<Long> sortedNumbersList;
+    public static List<Long> sortedNumbersList;
 
     public static void main(String[] args) {
         // Read path to file
@@ -18,7 +18,7 @@ public class PortaTestTask {
         try (BufferedReader filePathReader = new BufferedReader(new InputStreamReader(System.in));) {
             filePath = Paths.get(filePathReader.readLine());
         } catch (IOException e) {
-            System.err.println("Error reading from console");
+            System.err.println("Error reading from console!");
             throw new RuntimeException();
         }
 
@@ -51,13 +51,14 @@ public class PortaTestTask {
             throw new RuntimeException();
         }
 
-        System.out.println("Max number: " + findMaxNumber(allNumbers));
-        System.out.println("Min number: " + findMinNumber(allNumbers));
+        // Do our statistics methods
+        System.out.println("Max number in file: " + findMaxNumber(allNumbers));
+        System.out.println("Min number in file: " + findMinNumber(allNumbers));
+        System.out.println("Median: " + findMedian(allNumbers));
         System.out.println("Arithmetic mean: " + calculateArithmeticMean(allNumbers));
 
-        getMaxSeq(allNumbers);
-        System.out.println((System.currentTimeMillis() - startTimePoint) / 1000 + " сек");
-
+        // Print execution time
+        System.out.println("Execution time: " + (System.currentTimeMillis() - startTimePoint) / 1000 + " seconds");
     }
 
     public static long[] getMaxSeq(List<Long> arrList) {
@@ -110,19 +111,46 @@ public class PortaTestTask {
         return 0L;
     }
 
-    // The method find median in list of numbers.
-    public static long findMedian(List<Long> numbersList) {
-        return 1L;
+    /**
+     * The method find median in list of numbers
+     *
+     * @param numbersList must be {@link java.util.List} of {@link java.lang.Long}
+     * @return median double in numbersList
+     */
+    public static double findMedian(List<Long> numbersList) {
+        if (numbersList.size() == 1) { // The case when there is one element in the array
+            return numbersList.get(0);
+        } else if (numbersList.size() % 2 != 0) { // The case when the array has an odd number of elements
+            List<Long> sortedNumbersAsc = sortNumbersAsc(numbersList);
+            return sortedNumbersAsc.get(sortedNumbersAsc.size() / 2);
+        } else { // The case when the array has an even number of elements
+            double[] sortedNumbersAsc = sortNumbersAsc(numbersList).stream()
+                    .mapToDouble(Long::doubleValue)
+                    .toArray();
+            double fistIndex = sortedNumbersAsc[(sortedNumbersAsc.length / 2 - 1)];
+            double secondIndex = sortedNumbersAsc[(sortedNumbersAsc.length / 2)];
+            return 0.5 * (fistIndex + secondIndex);
+        }
     }
 
-    // The method takes a list of numbers and returns the maximum element.
-    public static long findMaxNumber(List<Long> numbersList) {
+    /**
+     * The method find max number in a list and returns it
+     *
+     * @param numbersList must be {@link java.util.List} of {@link java.lang.Long}
+     * @return max {@link java.lang.Long} number in numbersList
+     */
+    public static Long findMaxNumber(List<Long> numbersList) {
         List<Long> sortedNumbersList = sortNumbersAsc(numbersList);
         return sortedNumbersList.get(sortedNumbersList.size() - 1);
     }
 
-    // The method takes a list of numbers and returns the minimum element.
-    public static long findMinNumber(List<Long> numbersList) {
+    /**
+     * The method find min number in a list and returns it
+     *
+     * @param numbersList must be {@link java.util.List} of {@link java.lang.Long}
+     * @return min {@link java.lang.Long} number in numbersList
+     */
+    public static Long findMinNumber(List<Long> numbersList) {
         List<Long> sortedNumbersList = sortNumbersAsc(numbersList);
         return sortedNumbersList.get(0);
     }
