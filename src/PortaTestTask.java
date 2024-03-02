@@ -52,10 +52,10 @@ public class PortaTestTask {
         }
 
         // Do our statistics methods
-        System.out.println("Max number in file: " + findMaxNumber(allNumbers));
-        System.out.println("Min number in file: " + findMinNumber(allNumbers));
+//        System.out.println("Max number in file: " + findMaxNumber(allNumbers));
+//        System.out.println("Min number in file: " + findMinNumber(allNumbers));
         System.out.println("Median: " + findMedian(allNumbers));
-        System.out.println("Arithmetic mean: " + calculateArithmeticMean(allNumbers));
+//        System.out.println("Arithmetic mean: " + calculateArithmeticMean(allNumbers));
 
         // Print execution time
         System.out.println("Execution time: " + (System.currentTimeMillis() - startTimePoint) / 1000 + " seconds");
@@ -167,11 +167,9 @@ public class PortaTestTask {
             List<Long> sortedNumbersAsc = sortNumbersAsc(numbersList);
             return sortedNumbersAsc.get(sortedNumbersAsc.size() / 2);
         } else { // The case when the array has an even number of elements
-            double[] sortedNumbersAsc = sortNumbersAsc(numbersList).stream()
-                    .mapToDouble(Long::doubleValue)
-                    .toArray();
-            double fistIndex = sortedNumbersAsc[(sortedNumbersAsc.length / 2 - 1)];
-            double secondIndex = sortedNumbersAsc[(sortedNumbersAsc.length / 2)];
+            List<Long> sortedNumbersAsc = sortNumbersAsc(numbersList);
+            double fistIndex = sortedNumbersAsc.get(sortedNumbersAsc.size() / 2 - 1);
+            double secondIndex = sortedNumbersAsc.get(sortedNumbersAsc.size() / 2);
             return 0.5 * (fistIndex + secondIndex);
         }
     }
