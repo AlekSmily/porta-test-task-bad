@@ -57,10 +57,6 @@ public class PortaTestTask {
         System.out.println("Median: " + findMedian(allNumbers));
         System.out.println("Arithmetic mean: " + calculateArithmeticMean(allNumbers));
 
-        System.out.println("New method: " + getMaxIncreasingSequence(allNumbers));
-        System.out.println("New method 2: " + getMaxDescendingSequence(allNumbers));
-        getMaxSeq(allNumbers);
-
         // Print execution time
         System.out.println("Execution time: " + (System.currentTimeMillis() - startTimePoint) / 1000 + " seconds");
     }
@@ -102,10 +98,18 @@ public class PortaTestTask {
         int maxDecSeq = 1;
         for (int i = 0, j = 1; i < arrList.size() - 1; i++, j++) {
             if (arrList.get(i) < arrList.get(j)) {
+                if (maxDecSeq > maxDec) {
+                    maxDec = maxDecSeq;
+                    maxDecSeq = 1;
+                } else {
+                    maxDecSeq = 1;
+                }
                 maxIncSeq++;
             } else if (arrList.get(i) > arrList.get(j)) {
                 if (maxIncSeq > maxInc) {
                     maxInc = maxIncSeq;
+                    maxIncSeq = 1;
+                } else {
                     maxIncSeq = 1;
                 }
                 maxDecSeq++;
