@@ -142,14 +142,14 @@ public class PortaTestTask {
      * @param numbersList must be {@link java.util.List} of {@link java.lang.Long}
      * @return the <b>long</b> arithmetic mean of numbersList
      */
-    public static long calculateArithmeticMean(List<Long> numbersList) {
+    public static double calculateArithmeticMean(List<Long> numbersList) {
         long sum = 0;
-        for (Long l : numbersList) {
+        for (long l : numbersList) {
             sum += l;
         }
         // Checking division by zero
         if (sum != 0) {
-            return sum / numbersList.size();
+            return (double) sum / (double) numbersList.size();
         }
         return 0;
     }
