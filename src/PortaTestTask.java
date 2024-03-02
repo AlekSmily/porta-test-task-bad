@@ -91,51 +91,6 @@ public class PortaTestTask {
         return maxSequence;
     }
 
-    public static long[] getMaxSeq(List<Long> arrList) {
-        int maxInc = 1;
-        int maxDec = 1;
-        int maxIncSeq = 1;
-        int maxDecSeq = 1;
-        for (int i = 0, j = 1; i < arrList.size() - 1; i++, j++) {
-            if (arrList.get(i) < arrList.get(j)) {
-                if (maxDecSeq > maxDec) {
-                    maxDec = maxDecSeq;
-                    maxDecSeq = 1;
-                } else {
-                    maxDecSeq = 1;
-                }
-                maxIncSeq++;
-            } else if (arrList.get(i) > arrList.get(j)) {
-                if (maxIncSeq > maxInc) {
-                    maxInc = maxIncSeq;
-                    maxIncSeq = 1;
-                } else {
-                    maxIncSeq = 1;
-                }
-                maxDecSeq++;
-            } else {
-                if (maxIncSeq > maxInc) {
-                    maxInc = maxIncSeq;
-                }
-                if (maxDecSeq > maxDec) {
-                    maxDec = maxDecSeq;
-                }
-                maxIncSeq = 1;
-                maxDecSeq = 1;
-            }
-            if (j == arrList.size() - 1) {
-                if (maxIncSeq > maxInc) {
-                    maxInc = maxIncSeq;
-                }
-                if (maxDecSeq > maxDec) {
-                    maxDec = maxDecSeq;
-                }
-            }
-        }
-        System.out.println(maxInc + " " + maxDec);
-        return new long[]{maxInc, maxDec};
-    }
-
     /**
      * The method calculates the arithmetic mean of a set of numbers
      *
