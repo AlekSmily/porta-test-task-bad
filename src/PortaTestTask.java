@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -17,8 +18,8 @@ public class PortaTestTask {
         Path filePath;
         try (BufferedReader filePathReader = new BufferedReader(new InputStreamReader(System.in));) {
             filePath = Paths.get(filePathReader.readLine());
-        } catch (IOException e) {
-            System.err.println("Error reading from console!");
+        } catch (InvalidPathException | IOException e) {
+            System.err.println("Error reading from console! Check the correctness of the entered!");
             throw new RuntimeException();
         }
 
@@ -52,16 +53,24 @@ public class PortaTestTask {
         }
 
         // Do our statistics methods
-//        System.out.println("Max number in file: " + findMaxNumber(allNumbers));
-//        System.out.println("Min number in file: " + findMinNumber(allNumbers));
+        System.out.println("Max number in file: " + findMaxNumber(allNumbers));
+        System.out.println("Min number in file: " + findMinNumber(allNumbers));
         System.out.println("Median: " + findMedian(allNumbers));
-//        System.out.println("Arithmetic mean: " + calculateArithmeticMean(allNumbers));
+        System.out.println("Arithmetic mean: " + calculateArithmeticMean(allNumbers));
+        System.out.println("Max increasing sequence is " + maxIncreasingSequence(allNumbers) + " numbers");
+        System.out.println("Max descending sequence is " + maxDescendingSequence(allNumbers) + " numbers");
 
         // Print execution time
         System.out.println("Execution time: " + (System.currentTimeMillis() - startTimePoint) / 1000 + " seconds");
     }
 
-    public static long getMaxIncreasingSequence(List<Long> numbersList) {
+    /**
+     * The method returns the value of the longest increasing sequence
+     *
+     * @param numbersList must be {@link java.util.List} of {@link java.lang.Long}
+     * @return the <b>long</b> max increasing sequence in numbersList
+     */
+    public static long maxIncreasingSequence(List<Long> numbersList) {
         long maxSequence = 1;
         long maxCurrentSequence = 1;
         for (int i = 0, j = 1; j < numbersList.size(); i++, j++) {
@@ -76,7 +85,13 @@ public class PortaTestTask {
         return maxSequence;
     }
 
-    public static long getMaxDescendingSequence(List<Long> numbersList) {
+    /**
+     * The method returns the value of the longest descending sequence
+     *
+     * @param numbersList must be {@link java.util.List} of {@link java.lang.Long}
+     * @return the <b>long</b> max descending sequence in numbersList
+     */
+    public static long maxDescendingSequence(List<Long> numbersList) {
         long maxSequence = 1;
         long maxCurrentSequence = 1;
         for (int i = 0, j = 1; j < numbersList.size(); i++, j++) {
@@ -123,9 +138,9 @@ public class PortaTestTask {
             return sortedNumbersAsc.get(sortedNumbersAsc.size() / 2);
         } else { // The case when the array has an even number of elements
             List<Long> sortedNumbersAsc = sortNumbersAsc(numbersList);
-            double fistIndex = sortedNumbersAsc.get(sortedNumbersAsc.size() / 2 - 1);
+            double firstIndex = sortedNumbersAsc.get(sortedNumbersAsc.size() / 2 - 1);
             double secondIndex = sortedNumbersAsc.get(sortedNumbersAsc.size() / 2);
-            return 0.5 * (fistIndex + secondIndex);
+            return 0.5 * (firstIndex + secondIndex);
         }
     }
 
